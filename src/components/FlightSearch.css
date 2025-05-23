@@ -1,0 +1,56 @@
+.search-from,
+.search-to {
+    padding-right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+}
+
+.search-from-text,
+.search-to-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-family: "DM Sans", sans-serif;
+}
+
+.search-date {
+    padding-right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+}
+
+.search-btn {
+    width: 186px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: var(--background-main);
+    font-family: "DM Sans", sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transform: translateY(10px);
+}
+
+.divider {
+    width: 1px;
+    height: 77px;
+    background-color: var(--divider-color);
+    opacity: 0.1;
+}
+
+.search-to p,
+.search-from p,
+.search-date p {
+    font-family: "DM Sans", sans-serif;
+    font-size: 16px;
+}

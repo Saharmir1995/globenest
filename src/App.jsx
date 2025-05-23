@@ -1,16 +1,59 @@
-import { Children, useState } from 'react';
+import { useState, React, useEffect } from 'react';
+import HotelsSearch from './components/HotelsSearch';
+import HotelResultsList from './components/HotelResultsList'
+import FlightSearch from './components/FlightSearch';
+import FlightResultsList from './components/FlightResultsList'
 import './App.css';
+import Loading from './components/Loading';
+
 
 function App() {
 
   const [searchType, setSearchType] = useState('hotel')
+  const [results, setResults] = useState([]);
+  const [results2, setResults2] = useState([]);
+  const [checkIn, setCheckIn] = useState('')
+  const [checkOut, setCheckOut] = useState('')
+  const [date, setDate] = useState('');
+
+  const [adults, setAdults] = useState(1)
+  const [childs, setChilds] = useState(0)
+
+  const [loading, setLoading] = useState(false)
+
+
+
+  // ---------backgroundColor----------
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollTop = window.scrollY;
+  //     document.body.style.background = `linear-gradient(
+  //       to bottom,
+  //       #ffffff 0%,
+  //       #e6e6e6 ${scrollTop * 0.1}px,
+  //       #cccccc ${scrollTop * 0.2}px,
+  //       #b3b3b3 ${scrollTop * 0.3}px,
+  //       #999999 ${scrollTop * 0.4}px,
+  //       #808080 ${scrollTop * 0.5}px,
+  //       #666666 ${scrollTop * 0.6}px,
+  //       #4d4d4d ${scrollTop * 0.7}px,
+  //       #333333 ${scrollTop * 0.8}px,
+  //       #1a1a1a ${scrollTop * 0.9}px,
+  //       #000000 ${scrollTop}px
+  //     )`;
+  //   }
+
+  //   window.addEventListener('scroll', handleScroll)
+  //   return () => window.removeEventListener('scroll', handleScroll)
+  // }, []);
+
 
   return (
-    <div className="App">
+    <div className="App" >
       <main className='main'
         style={{
-          backgroundImage: "url('/assets/background-desktop.png')",
-          backgroundSize: 'contain',
+          backgroundSize: 'cover',
+          backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           height: "100vh",
           width: "100vw",
@@ -18,21 +61,59 @@ function App() {
       >
         <FilterHotelOrFlight searchType={searchType} setSearchType={setSearchType} />
 
-        {searchType === 'hotel' && <HotelsSearch />}
-        {searchType === 'hotel' && <Search searchType={searchType} />}
+        {searchType === 'hotel' &&
+          <HotelsSearch searchType={searchType}
+            results={results}
+            setResults={setResults}
+            checkIn={checkIn}
+            checkOut={checkOut}
+            setCheckIn={setCheckIn}
+            setCheckOut={setCheckOut}
+            adults={adults}
+            setAdults={setAdults}
+            childs={childs}
+            setChilds={setChilds}
+            loading={loading}
+            setLoading={setLoading}
+          >
 
-        {searchType === 'flight' && <FlightsSearch />}
-        {searchType === 'flight' && <Search searchType={searchType} />}
+            {loading ? (<Loading />) : results.length > 0 ? (<HotelResultsList results={results} checkIn={checkIn} checkOut={checkOut} childs={childs} adults={adults} />) : (
+              <p>No hotels available for the selected dates.</p>
+            )}
+          </HotelsSearch>}
+
+
+        {searchType === 'flight' &&
+          <FlightSearch results2={results2}
+            setResults2={setResults2}
+            date={date}
+            setDate={setDate}
+            searchType={searchType}
+            loading={loading}
+            setLoading={setLoading}>
+              
+            {loading ? (<Loading />) : results2.length > 0 ? (<FlightResultsList />) : (<p>No flights available for the selected date.</p>
+            )}
+          </FlightSearch>}
+
       </main>
     </div >
   );
 }
 export default App;
 
+
+
 function FilterHotelOrFlight({ setSearchType, searchType }) {
+
+  function handleClickHotel() {
+    setSearchType('hotel')
+  }
+
+
   return (
     <div className='filter-hotel-flight' >
-      <div className='filter-btn-hotel' style={{ backgroundColor: searchType === 'hotel' ? '#C08B7D' : "#d7d7d7", color: searchType === 'hotel' ? "#d7d7d7" : "#223A60" }} onClick={() => setSearchType('hotel')}>
+      <div className='filter-btn-hotel' style={{ backgroundColor: searchType === 'hotel' ? '#C08B7D' : "#d7d7d7", color: searchType === 'hotel' ? "#d7d7d7" : "#223A60" }} onClick={handleClickHotel}>
         <span>
           <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 20 20" >
             <path style={{ fill: searchType === 'hotel' ? "#d7d7d7" : "#223A60" }} d="M2 12h18v6h-2v-2H2v2H0V2h2zm8-6h8a2 2 0 0 1 2 2v3H10zm-4 5a3 3 0 1 1 0-6a3 3 0 0 1 0 6" />
@@ -50,70 +131,5 @@ function FilterHotelOrFlight({ setSearchType, searchType }) {
 }
 
 
-function FlightsSearch({ Children }) {
-  return (
-    <div>
-      {Children}
-    </div>
-  )
-}
 
-function HotelsSearch({ Children }) {
-  return (
-    <div>
-      {Children}
-    </div>
-  )
-}
-
-function Search({ searchType }) {
-  return (
-    <div className='search'>
-      <div className='search-destination'>
-        <div className='search-destination-text'>
-          <p>Destination</p>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20">
-            <path fill="#292D32" d="M10.103 12.778L16.81 6.08a.69.69 0 0 1 .99.012a.726.726 0 0 1-.012 1.012l-7.203 7.193a.69.69 0 0 1-.985-.006L2.205 6.72a.727.727 0 0 1 0-1.01a.69.69 0 0 1 .99 0z" />
-          </svg>
-        </div>
-        <input className='input' placeholder='Where Are You Going?' />
-      </div>
-
-      <Divider />
-
-      <div className='search-check-in'>
-        <p>Check in</p>
-        <input className='input' placeholder='Choose Dates' />
-      </div>
-
-      <Divider />
-
-      <div className='search-check-out'>
-        <p>Check out</p>
-        <input className='input' placeholder='Choose Dates' />
-      </div>
-
-      <Divider />
-
-      <div className='search-guest'>
-        <div className='search-guest-text'>
-          <p>Guest</p>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20">
-            <path fill="#292D32" d="M10.103 12.778L16.81 6.08a.69.69 0 0 1 .99.012a.726.726 0 0 1-.012 1.012l-7.203 7.193a.69.69 0 0 1-.985-.006L2.205 6.72a.727.727 0 0 1 0-1.01a.69.69 0 0 1 .99 0z" />
-          </svg>        </div>
-        <input className='input' placeholder='Add Guest' />
-      </div>
-
-      <div className='search-btn' style={{ backgroundColor: searchType === 'hotel' ? '#C08B7D' : "#d7d7d7", backgroundColor: searchType === 'flight' ? "#223A60" : '#C08B7D' }} >
-        Search
-      </div>
-    </div>
-  )
-}
-
-
-function Divider() {
-  return (
-    <div className='divider'></div>
-  )
-}
+// ---------------------------------------------------------------------

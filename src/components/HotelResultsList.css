@@ -1,0 +1,48 @@
+.hotel-results  {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-family: "DM Sans", sans-serif;
+    transform: translateX(-180px);
+  }
+  
+  .hotel-card {
+    width: 355px;
+    height: 436px;
+    background-color: var(--background-main);
+    border-radius: 15px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .card-hotel-details {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 15px;
+  }
+  
+  .card-hotel-details h3 {
+    margin: 0;
+  }
+  
+  .passenger-request {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+  }
+  
+  .card-price {
+    padding: 15px;
+  }
+  
+  .card-img {
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+  }
