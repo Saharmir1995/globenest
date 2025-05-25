@@ -1,4 +1,5 @@
 import './FlightResultsList.css'
+import { React } from 'react'
 
 export default function FlightResultsList(results2) {
 

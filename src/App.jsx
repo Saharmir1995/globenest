@@ -109,7 +109,6 @@ function FilterHotelOrFlight({ setSearchType, searchType, setResults ,setResults
     setResults([])
   }
 
-
   function handleClickFlight() {
     setSearchType('flight')
     setResults2([])
