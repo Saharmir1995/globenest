@@ -4,7 +4,7 @@ import { useState } from 'react';
 import './HotelsSearch.css'
 
 
-export default function HotelsSearch({ searchType, results, setResults, checkIn, checkOut, setCheckIn, setCheckOut, adults, setAdults, childs, setChilds, children, setLoading, loading }) {
+export default function HotelsSearch({ searchType, results, setResults, checkIn, checkOut, setCheckIn, setCheckOut, adults, setAdults, childs, setChilds, children, setLoading }) {
 
     const [city, setCity] = useState('')
     const [openCard, setOpenCard] = useState(false)
@@ -56,7 +56,7 @@ export default function HotelsSearch({ searchType, results, setResults, checkIn,
         e.preventDefault();
 
         if (city && checkIn && checkOut && adults !== null && childs !== null) {
-            const url = `http://localhost:4001/hotels?city=${city}`;
+            const url = `http://localhost:3001/hotels?city=${city}`;
 
             try {
                 setLoading(true)

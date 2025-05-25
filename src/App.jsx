@@ -59,7 +59,7 @@ function App() {
           width: "100vw",
         }}
       >
-        <FilterHotelOrFlight searchType={searchType} setSearchType={setSearchType} />
+        <FilterHotelOrFlight searchType={searchType} setSearchType={setSearchType} setResults={setResults} setResults2={setResults2}/>
 
         {searchType === 'hotel' &&
           <HotelsSearch searchType={searchType}
@@ -77,23 +77,21 @@ function App() {
             setLoading={setLoading}
           >
 
-            {loading ? (<Loading />) : results.length > 0 ? (<HotelResultsList results={results} checkIn={checkIn} checkOut={checkOut} childs={childs} adults={adults} />) : (
-              <p>No hotels available for the selected dates.</p>
-            )}
+            {loading ? (<Loading />) : results.length > 0 ? (<HotelResultsList results={results} checkIn={checkIn} checkOut={checkOut} childs={childs} adults={adults} />) : ('')}
           </HotelsSearch>}
 
 
         {searchType === 'flight' &&
-          <FlightSearch results2={results2}
+          <FlightSearch
+            results2={results2}
             setResults2={setResults2}
             date={date}
             setDate={setDate}
             searchType={searchType}
             loading={loading}
             setLoading={setLoading}>
-              
-            {loading ? (<Loading />) : results2.length > 0 ? (<FlightResultsList />) : (<p>No flights available for the selected date.</p>
-            )}
+
+            {loading ? (<Loading />) : results2.length > 0 ? (<FlightResultsList results2={results2}/>) : ('')}
           </FlightSearch>}
 
       </main>
@@ -104,10 +102,17 @@ export default App;
 
 
 
-function FilterHotelOrFlight({ setSearchType, searchType }) {
+function FilterHotelOrFlight({ setSearchType, searchType, setResults ,setResults2}) {
 
   function handleClickHotel() {
     setSearchType('hotel')
+    setResults([])
+  }
+
+
+  function handleClickFlight() {
+    setSearchType('flight')
+    setResults2([])
   }
 
 
@@ -121,7 +126,7 @@ function FilterHotelOrFlight({ setSearchType, searchType }) {
         </span>
         <p>Hotels</p>
       </div>
-      <div className='filter-btn-flight' style={{ backgroundColor: searchType === 'flight' ? "#223A60" : "#d7d7d7", color: searchType === 'flight' ? "#d7d7d7" : "#283841" }} onClick={() => setSearchType('flight')}>
+      <div className='filter-btn-flight' style={{ backgroundColor: searchType === 'flight' ? "#223A60" : "#d7d7d7", color: searchType === 'flight' ? "#d7d7d7" : "#283841" }} onClick={handleClickFlight}>
         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
           <path style={{ fill: searchType === 'flight' ? "#d7d7d7" : "#283841" }} fill="#000" d="m9.983 20.048l-2.09-3.946l-3.966-2.11l1.083-1.077l3.452.587l3.05-3.05L4.01 7.25l1.388-1.38l9.125 1.565l3.12-3.139q.42-.421 1.03-.421t1.03.421q.422.421.422 1.028t-.421 1.028l-3.145 3.125l1.566 9.12l-1.394 1.394l-3.189-7.502l-3.05 3.05l.573 3.427z" /></svg>
         <p>Flights</p>

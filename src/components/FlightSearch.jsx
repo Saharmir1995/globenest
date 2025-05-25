@@ -29,21 +29,29 @@ export default function FlightSearch({ children, date, setDate, searchType ,resu
 
     const handleSubmitFlight = async (e) => {
         e.preventDefault();
-
+      
         if (to && from && date && guests !== null) {
-            const url = `http://localhost:3001/flights?from=${from}&to=${to}&date=${date}&guests=${guests}`;
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
+          try {
+            const response = await fetch(`http://localhost:3001/flights`);
+            const allFlights = await response.json();
 
-                console.log(data);
-                // setResults2(data);
+            // console.log(allFlights);
+      
+            const filtered = allFlights.filter(flight =>
+                flight.from === from &&
+                flight.to === to &&
+                flight.date === date &&
+                flight.guests >= guests
+              );
+              
+              setResults2(filtered);
+              console.log(results2);
             } catch (err) {
-                console.error('there is an error for fetching flights data!' , err)
-            }
+            console.error('There is an error fetching flight data!', err);
+          }
         }
-
-    }
+      };
+      
 
     return (
         <div className='flight'>

@@ -1,0 +1,86 @@
+
+.flight-card {
+    /* width: 90%; */
+    width: 650px;
+    height: 65px;
+    background-color: #eaf0f0;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    position: relative;
+    padding: 30px 0;
+    transition: all ease 0.4s;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  
+  .flight-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .flight-card-destination {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 30px;
+    gap: 10px;
+  }
+  
+  .flight-card-line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .flight-card-line span {
+    width: 250px;
+    height: 1px;
+    background-color: #223a60;
+    position: relative;
+  }
+  
+  .flight-card-line span div {
+    transform: translateY(-20px) translateX(-10px);
+  }
+  
+  .flight-card-line span::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #223a60;
+    top: 0;
+    right: 0;
+    transform: translateY(-7px);
+  }
+  
+  .flight-card-buying {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .flight-card-btn {
+    width: 100px;
+    height: 50px;
+    background-color: #223a60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    transition: all ease 0.3s;
+  }
+  
+  .flight-card-btn:hover {
+    background-color: #425f8d;
+  }
+  
+  .flight-card-price {
+    font-weight: 700;
+  }

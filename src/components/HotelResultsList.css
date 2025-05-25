@@ -10,13 +10,20 @@
   .hotel-card {
     width: 355px;
     height: 436px;
-    background-color: var(--background-main);
+    background-color: #eaf0f0;
     border-radius: 15px;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
     position: relative;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    transition: all ease 0.4s;
+  }
+
+  .hotel-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
   }
   
   .card-hotel-details {
